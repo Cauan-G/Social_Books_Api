@@ -3,6 +3,7 @@ package br.fepi.socialbooks.resources;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +39,26 @@ public class LivrosResources {
 		livrosRepository.save(livro);
 	}
 	
+	//@RequestMapping(method = RequestMethod.GET)
+	//public List<Livro> listar(@RequestBody Livro livro) {
+	//	return livrosRepository.findAll();
+	//}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)	
 	public Livro buscaId(@PathVariable("id") long id) {
-		
-		
 		return livrosRepository.findById(id).orElse(null);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)	
+	public void deletar (@PathVariable("id") Long id) {
+		livrosRepository.deleteById(id);
+	}
+
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public void atualizar (@RequestBody Livro livro,@PathVariable("id") Long id) {
+		livro.setId(id);
+		livrosRepository.save(livro);
 	}
 	
 }
