@@ -99,4 +99,8 @@ public class Livro {
 		this.comentarios = comentarios;
 	}	
 	
+	
+	public Livro () {
+		
+	}
 }
